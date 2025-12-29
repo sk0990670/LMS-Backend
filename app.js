@@ -3,6 +3,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import userRoutes from './routes/user.routes.js';
+import errorMiddleware from './middlewares/error.middleware.js';
+
 const app = express();
 
 app.use(express.json());
@@ -31,5 +33,8 @@ app.all('*', (req, res) => {
     message: 'Page Not Found',
   });
 });
+
+//here we write genric error handling middleware
+app.use(errorMiddleware);
 
 export default app;
