@@ -1,28 +1,32 @@
-// .env.example.js
-// Copy this file to .env and fill in your actual values
+NODE_ENV = development
 
-module.exports = {
-    PORT: 5000,
-    NODE_ENV: 'development',
-    
-    // Database
-    DB_HOST: 'localhost',
-    DB_PORT: 27017,
-    DB_NAME: 'lms_db',
-    DB_USER: 'your_db_user',
-    DB_PASSWORD: 'your_db_password',
-    
-    // JWT
-    JWT_SECRET: 'your_jwt_secret_key',
-    JWT_EXPIRE: '7d',
-    
-    // Email
-    EMAIL_HOST: 'smtp.gmail.com',
-    EMAIL_PORT: 587,
-    EMAIL_USER: 'your_email@gmail.com',
-    EMAIL_PASSWORD: 'your_email_password',
-    
-    // API
-    API_URL: 'http://localhost:5000',
-    CORS_ORIGIN: 'http://localhost:3000',
-};
+PORT = 5000
+
+MONGO_URI = mongodb://127.0.0.1:27017/lms
+
+# This is jwt tokken and expire
+JWT_SECRET = <YOUR_LONG_JWT_SECRET>
+JWT_EXPIRY = <JWT_EXPIRY>
+
+# This is use for file uploading
+CLOUDINARY_CLOUD_NAME = <YOUR_CLOUDINARY_CLOUD_NAME>
+CLOUDINARY_API_KEY = <YOUR_CLOUDINARY_API_KEY>
+CLOUDINARY_API_SECRET = <YOUR_CLOUDINARY_API_SECRET>
+
+# This is used for mail send
+SMTP_HOST = <YOUR_SMTP_HOST>
+SMTP_PORT = <YOUR_SMTP_POST>
+SMTP_USERNAME = <YOUR_SMTP_USERNAME>
+SMTP_PASSWORD = <YOUR_SMTP_PASSWORD>
+SMTP_FROM_EMAIL = <YOUR_SMTP_FROM_EMAIL>
+
+# This is used for payment gateway
+RAZORPAY_KEY_ID = <YOUR_RAZORPAY_KEY>
+RAZORPAY_SECRET = <YOUR_RAZORPAY_SECRET>
+RAZORPAY_PLAN_ID = <YOUR_RAZORPAY_PLAN_ID>
+
+# This is friend end url
+FRONTEND_URL = <YOUR_FRONTEND_WEBSITE_URL>
+
+# This is for contact
+CONTACT_US_EMAIL = <YOUR_CONTACT_US_EMAIL>

@@ -14,6 +14,7 @@ const userSchema = new Schema({
         trim: true,
     },
 
+    
     email: {
         type: String,
         required: [true, 'Email is required'],
@@ -29,7 +30,7 @@ const userSchema = new Schema({
         select: false, // Exclude password field by default when querying
     },
 
-    avtar: {
+    avatar: {
         public_id: {
             type: String,
             required: true,
@@ -63,7 +64,7 @@ userSchema.pre('save', async function(next) {
 
 
 userSchema.methods = {
-    genrateJWTToken: async function() {
+    generateJWTToken: async function() {
         return await jwt.sign(
             { id: this._id, email: this.email, subscription: this.subscription }, 
             process.env.JWT_SECRET, 
