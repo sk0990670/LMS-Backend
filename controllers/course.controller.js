@@ -3,8 +3,9 @@ import AppError from '../utils/error.util.js';
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 import path from 'path';
+import asyncHandler from '../middlewares/asyncHandler.middleware.js';
 
-const getAllCourses = async (req, res, next) => {
+const getAllCourses = asyncHandler(async (req, res, next) => {
   // Implementation for fetching all courses
 
   // Find all the courses without lectures
@@ -15,9 +16,9 @@ const getAllCourses = async (req, res, next) => {
     message: 'All courses',
     courses,
   });
-};
+});
 
-const getLectureByCourseId = async (req, res, next) => {
+const getLectureByCourseId = asyncHandler(async (req, res, next) => {
   // Implementation for fetching lectures by course ID
 
   const { id } = req.params;
@@ -33,9 +34,9 @@ const getLectureByCourseId = async (req, res, next) => {
     message: 'Course lectures fetched successfully',
     lectures: course.lectures,
   });
-};
+});
 
-const createCourse = async (req, res, next) => {
+const createCourse = asyncHandler(async (req, res, next) => {
   // Implementation for creating a new course
 
   try {
@@ -101,10 +102,10 @@ const createCourse = async (req, res, next) => {
     // Handle unexpected server/database errors
     return next(new AppError(error.message, 500));
   }
-};
+});
 
 
-const updateCourse = async (req, res, next) => {
+const updateCourse = asyncHandler(async (req, res, next) => {
   // Controller for updating an existing course
 
   try {
@@ -166,10 +167,10 @@ const updateCourse = async (req, res, next) => {
   } catch (error) {
     return next(new AppError(error.message, 500));
   }
-};
+});
 
 
-const removeCourse = async (req, res, next) => {
+const removeCourse = asyncHandler(async (req, res, next) => {
   // Controller for removing a course
 
   try {
@@ -201,9 +202,10 @@ const removeCourse = async (req, res, next) => {
     // Handle unexpected errors
     return next(new AppError(error.message, 500));
   }
-};
+});
 
-const addLectureToCourseById = async (req, res, next) => {
+
+const addLectureToCourseById = asyncHandler(async (req, res, next) => {
   // Controller for adding a lecture to a course by ID
 
   try {
@@ -284,9 +286,9 @@ const addLectureToCourseById = async (req, res, next) => {
     // Handle unexpected errors
     return next(new AppError(error.message, 500));
   }
-};
+});
 
-const removeLectureFromCourse = async (req, res, next) => {
+const removeLectureFromCourse = asyncHandler(async (req, res, next) => {
   // Controller for removing a lecture from a course
 
   try {
@@ -337,7 +339,7 @@ const removeLectureFromCourse = async (req, res, next) => {
   } catch (error) {
     return next(new AppError(error.message, 500));
   }
-};
+});
 
 
 

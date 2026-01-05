@@ -4,6 +4,7 @@ import cloudinary from 'cloudinary';
 import fs from 'fs';
 import sendEmail from '../utils/sendEmail.js';
 import crypto from 'crypto';
+import asyncHandler from '../middlewares/asyncHandler.middleware.js';
 
 const cookieOptions = {
   secure: process.env.NODE_ENV === 'production',
@@ -11,7 +12,7 @@ const cookieOptions = {
   httpOnly: true,
 };
 
-const register = async (req, res, next) => {
+const register = asyncHandler(async (req, res, next) => {
   const { fullName, email, password } = req.body;
 
   if (!fullName || !email || !password) {
@@ -84,9 +85,9 @@ const register = async (req, res, next) => {
     message: 'User registered successfully',
     user,
   });
-};
+});
 
-const login = async (req, res, next) => {
+const login = asyncHandler(async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -113,7 +114,7 @@ const login = async (req, res, next) => {
   } catch (error) {
     return next(new AppError(error.message, 500));
   }
-};
+});
 
 /**
  * LOGOUT
@@ -138,7 +139,7 @@ const logout = (req, res) => {
  * Note: This assumes you have an authentication middleware (like `isLoggedIn`)
  * that decodes the token and attaches `req.user`.
  */
-const getProfile = async (req, res, next) => {
+const getProfile = asyncHandler(async (req, res, next) => {
   try {
     // If your auth middleware sets req.user.id, fetch the full details:
     // const user = await User.findById(req.user.id);
@@ -154,9 +155,9 @@ const getProfile = async (req, res, next) => {
   } catch (error) {
     return next(new AppError('Failed to fetch profile details', 500));
   }
-};
+});
 
-const forgotPassword = async (req, res, next) => {
+const forgotPassword = asyncHandler(async (req, res, next) => {
   // Implementation for forgot password
    // Extracting email from request body
   const { email } = req.body;
@@ -211,9 +212,9 @@ const forgotPassword = async (req, res, next) => {
       )
     );
   }
-};
+});
 
-const resetPassword = async (req, res, next) => {
+const resetPassword = asyncHandler(async (req, res, next) => {
   // Implementation for reset password
 
   // Extracting resetToken from req.params object
@@ -263,9 +264,9 @@ const resetPassword = async (req, res, next) => {
     success: true,
     message: 'Password changed successfully',
   });
-};
+});
 
-const changePassword = async (req, res, next) => {
+const changePassword = asyncHandler(async (req, res, next) => {
   // Implementation for change password
 
 // Destructuring the necessary data from the req object
@@ -308,9 +309,9 @@ const changePassword = async (req, res, next) => {
     success: true,
     message: 'Password changed successfully',
   });
-};
+});
 
-const updateUser = async (req, res, next) => {
+const updateUser = asyncHandler(async (req, res, next) => {
   // Implementation for updating user details
   
   // Destructuring the necessary data from the req object
@@ -364,7 +365,7 @@ const updateUser = async (req, res, next) => {
     success: true,
     message: 'User details updated successfully',
   });
-};
+});
 
 
 

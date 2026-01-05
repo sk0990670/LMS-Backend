@@ -3,10 +3,11 @@ import AppError from '../utils/error.util.js';
 import User from '../models/user.model.js';
 import { razorpay } from '../server.js';
 import Payment from '../models/Payment.model.js';
+import asyncHandler from '../middlewares/asyncHandler.middleware.js';
 
 
 
-export const getRazorpayApiKey = async (req, res, next) => {
+export const getRazorpayApiKey = asyncHandler(async (req, res, next) => {
     try {
         res.status(200).json({
             success: true,
@@ -15,11 +16,11 @@ export const getRazorpayApiKey = async (req, res, next) => {
     } catch (error) {
         return next(new AppError(error.message, 500));
     }
-};
+});
 
 export default getRazorpayApiKey;
 
-export const buySubscription = async (req, res, next) => {
+export const buySubscription = asyncHandler(async (req, res, next) => {
   try {
     // Extracting user id from request object
     const { id } = req.user;
@@ -66,10 +67,10 @@ export const buySubscription = async (req, res, next) => {
       new AppError(error.message || 'Subscription failed', 500)
     );
   }
-};
+});
 
 
-export const verifySubscription = async (req, res, next) => {
+export const verifySubscription = asyncHandler(async (req, res, next) => {
     // Implementation here
   const { id } = req.user;
   const { razorpay_payment_id, razorpay_subscription_id, razorpay_signature } = req.body;
@@ -111,9 +112,9 @@ export const verifySubscription = async (req, res, next) => {
     success: true,
     message: 'Payment verified successfully',
   });
-};
+});
 
-export const cancelSubscription = async (req, res, next) => {
+export const cancelSubscription = asyncHandler(async (req, res, next) => {
     // Implementation here
 const { id } = req.user;
 
@@ -183,9 +184,9 @@ const { id } = req.user;
     success: true,
     message: 'Subscription canceled successfully',
   });
-};
+});
 
-export const allPayments = async (req, res, next) => {
+export const allPayments = asyncHandler(async (req, res, next) => {
     // Implementation here
 const { count, skip } = req.query;
 
@@ -253,4 +254,4 @@ const { count, skip } = req.query;
     finalMonths,
     monthlySalesRecord,
   });
-};
+});
